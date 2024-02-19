@@ -10,4 +10,7 @@
 
 export const environment = {
   production: false,
+  endpoint: 'http://ec2-16-171-197-233.eu-north-1.compute.amazonaws.com/',
+  environment: 'http://ec2-16-171-197-233.eu-north-1.compute.amazonaws.com/api/',
+
 };
