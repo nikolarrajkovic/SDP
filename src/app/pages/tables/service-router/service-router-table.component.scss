@@ -53,3 +53,22 @@
     }
   }
 }
+i {
+  font-size: 2rem !important;
+  color: var(--smart-table-fg-secondary);
+  cursor: pointer;
+
+  &:hover {
+    color: #1e6bb8;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.load-more-btn {
+  display: flex;
+  justify-content: center;
+}

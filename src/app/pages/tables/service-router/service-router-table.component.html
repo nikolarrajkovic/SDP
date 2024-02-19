@@ -1,9 +1,9 @@
 <nb-card>
+  <nb-card-header class="header">
+    Create new Router
+    <i class="nb-plus" (click)="create(null)"></i>
+  </nb-card-header>
   <nb-card-body>
-
-    <label class="search-label" for="search">Search:</label>
-    <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
-
     <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
 
       <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
@@ -14,7 +14,6 @@
           {{customColumn}}
         </th>
         <td nbTreeGridCell *nbTreeGridCellDef="let row">
-          <ngx-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></ngx-fs-icon>
           {{row.data[customColumn]}}
         </td>
       </ng-container>
@@ -28,7 +27,22 @@
         <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column] || '-'}}</td>
       </ng-container>
 
-    </table>
+      <ng-container [nbTreeGridColumnDef]="actionColumn">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>
+          {{actionColumn}}
+        </th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">
+          <div style="display: flex">
+            <i *ngIf="row.data.add" class="nb-plus" (click)="create(row); $event.stopPropagation()"></i>
+            <i *ngIf="row.data.edit" class="nb-edit" (click)="update(row); $event.stopPropagation()"></i>
+            <i *ngIf="row.data.delete" class="nb-trash" (click)="delete(row); $event.stopPropagation()"></i>
+          </div>
+        </td>
+      </ng-container>
 
+    </table>
   </nb-card-body>
 </nb-card>
+<div *ngIf="hasMore" class="load-more-btn">
+  <button nbButton status="primary" (click)="loadMore()">Load More</button>
+</div>

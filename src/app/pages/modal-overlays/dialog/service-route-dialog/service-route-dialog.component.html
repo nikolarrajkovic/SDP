@@ -1,0 +1,36 @@
+<nb-card>
+  <nb-card-header>{{ title }}</nb-card-header>
+  <nb-card-body *ngIf="type === DialogType.CREATE && parentData">
+    <label>Name</label>
+    <input class="input-value" type="text" nbInput fullWidth placeholder="Name" [(ngModel)]="parentData.data.name">
+  </nb-card-body>
+  <nb-card-body *ngIf="type === DialogType.DELETE && parentData">
+    <label>Are you sure you want to delete router {{ parentData.data.name }}?</label>
+  </nb-card-body>
+  <nb-card-body *ngIf="type === DialogType.DELETE && !parentData">
+    <label>Are you sure you want to delete rule of operator service {{ childData.data.service }} on router {{ childData.data.parentName }}?</label>
+  </nb-card-body>
+  <nb-card-body *ngIf="(type === DialogType.CREATE && !parentData) || (type === DialogType.EDIT)">
+    <label>Router Name</label>
+    <input readonly class="input-value" type="text" nbInput fullWidth placeholder="Router name" [(ngModel)]="childData.data.parentName">
+    <label>Operator Service</label>
+    <nb-select *ngIf="type === DialogType.CREATE" class="input-value" (selectedChange)="selectedService($event)" [selected]="selectedServiceIndex" fullWidth>
+      <nb-option *ngFor="let operatorService of services; index as i" [value]="i.toString()">{{ operatorService }}</nb-option>
+    </nb-select>
+    <input *ngIf="type === DialogType.EDIT" readonly class="input-value" type="text" nbInput fullWidth placeholder="Operator Service" [(ngModel)]="childData.data.service">
+    <label>Type</label>
+    <nb-select class="input-value" (selectedChange)="selectedType($event)" [selected]="selectedTypeIndex" fullWidth>
+      <nb-option value="0">{{ RuleType.Default }}</nb-option>
+      <nb-option value="1">{{ RuleType.Timer }}</nb-option>
+      <nb-option value="2">{{ RuleType.EventCount }}</nb-option>
+    </nb-select>
+    <label>Value</label>
+    <input class="input-value" type="text" nbInput fullWidth placeholder="Value" [(ngModel)]="childData.data.value">
+  </nb-card-body>
+  <nb-card-footer>
+    <button style="margin-right: 15px;" nbButton hero status="basic" (click)="dismiss()">Cancel</button>
+    <button *ngIf="type === DialogType.EDIT" nbButton hero status="primary" (click)="update()">Update</button>
+    <button *ngIf="type === DialogType.CREATE" nbButton hero status="success" (click)="create()">Add</button>
+    <button *ngIf="type === DialogType.DELETE" nbButton hero status="danger" (click)="delete()">Delete</button>
+  </nb-card-footer>
+</nb-card>

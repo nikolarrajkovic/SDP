@@ -1,0 +1,12 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.ng2-smart-action-delete-delete:hover {
+  padding-bottom: 5px;
+  color: var(--smart-table-action-add-edit-hover-text-color) !important;
+}

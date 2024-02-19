@@ -2,20 +2,25 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TablesComponent } from './tables.component';
-import { SmartTableComponent } from './smart-table/smart-table.component';
-import { TreeGridComponent } from './tree-grid/tree-grid.component';
+import { CampaignsTableComponent } from './campaigns/campaigns-table.component';
+import { ServiceRouterTableComponent } from './service-router/service-router-table.component';
 
 const routes: Routes = [{
   path: '',
   component: TablesComponent,
   children: [
     {
-      path: 'smart-table',
-      component: SmartTableComponent,
+      path: 'campaigns',
+      component: CampaignsTableComponent,
     },
     {
-      path: 'tree-grid',
-      component: TreeGridComponent,
+      path: 'service-router',
+      component: ServiceRouterTableComponent,
+    },
+    {
+      path: '',
+      redirectTo: 'campaigns',
+      pathMatch: 'full',
     },
   ],
 }];
@@ -28,6 +33,6 @@ export class TablesRoutingModule { }
 
 export const routedComponents = [
   TablesComponent,
-  SmartTableComponent,
-  TreeGridComponent,
+  CampaignsTableComponent,
+  ServiceRouterTableComponent,
 ];
