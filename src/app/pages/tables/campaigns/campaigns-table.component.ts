@@ -144,7 +144,7 @@ export class CampaignsTableComponent implements OnInit {
   }
 
   openCampaign(event): void {
-    const campaign = this.campaigns.find(camp => camp.name = event.data.name);
+    const campaign = this.campaigns.find(camp => camp.name === event.data.name);
     window.open(`${environment.endpoint}${campaign.previewURL}`, '_blank');
   }
 

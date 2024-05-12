@@ -36,9 +36,8 @@ export class ShowcaseDialogComponent implements OnInit {
       this.selectedRouterIndex = this.serviceRouters.find(router => router.id === this.data.serviceRouter.id)
         .id.toString();
       this.selectedRouterId = this.data.serviceRouter.rules[0].serviceRouterId;
-
+      this.selectRouterId(this.selectedRouterId);
     }
-    this.selectedServiceIndex = this.services.findIndex(os => os === this.data.operatorService).toString();
     this.selectedOperatorService = this.data.operatorService;
   }
 
@@ -76,6 +75,8 @@ export class ShowcaseDialogComponent implements OnInit {
       .map(rule => rule.operatorService);
     if (this.services.length === 1) {
       this.selectedServiceIndex = this.services[0];
+    } else {
+      this.selectedServiceIndex = this.services.find(os => os === this.data.operatorService);
     }
   }
 
