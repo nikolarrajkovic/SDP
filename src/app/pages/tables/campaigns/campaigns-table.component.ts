@@ -110,6 +110,7 @@ export class CampaignsTableComponent implements OnInit {
             .then(d => this.source.load(d));
         } else
           this.source.load(this.createCampaignTablePreviewDTO(data));
+        this.campaigns = [ ...this.campaigns, ...data ];
       });
     }
   }
@@ -132,14 +133,14 @@ export class CampaignsTableComponent implements OnInit {
     };
   }
 
-  getOperationServiceString(os: OperatorService): string {
+  getOperationServiceString(os: OperatorService | any): string {
     switch (os) {
       case OperatorService.Ingame:
         return 'Ingame';
       case OperatorService.Playono:
         return 'Playono';
       default:
-        return 'Unknown';
+        return os.toString();
     }
   }
 
